@@ -1,22 +1,15 @@
 class Player {
-    constructor(paddleHeight, paddleWidth, paddleX, canvas) {
-        this.paddleHeight = paddleHeight;
-        this.paddleWidth = paddleWidth;
-        this.paddleX = paddleX;
+    constructor(canvas, ctx) {
         this.canvas = canvas;
+        this.ctx = ctx;
     }
 
-    newPos() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-}
-
-    drawPlayer(ctx) {
-        ctx.beginPath();
-        ctx.rect(this.paddleX, this.canvas.height - this.paddleHeight, this.paddleWidth, this.paddleHeight);
-        ctx.fillStyle = "#0095DD";
-        ctx.fill();
-        ctx.closePath();
+    draw(x, y, width, height) {
+        this.ctx.beginPath();
+        this.ctx.rect(x, y, width, height);
+        this.ctx.fillStyle = "#0095DD";
+        this.ctx.fill();
+        this.ctx.closePath();
     }
 }
 
