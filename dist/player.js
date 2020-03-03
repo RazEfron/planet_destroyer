@@ -26,12 +26,13 @@ class Player {
     draw() {
         let player = new Image();
         player.src = 'src/images/player.png'
-            this.ctx.drawImage(player, this.position.x, this.position.y, this.width, this.height);
-            // this.ctx.beginPath();
+        this.ctx.beginPath();
+        this.ctx.drawImage(player, this.position.x, this.position.y, this.width, this.height);
+        this.ctx.closePath();
+
     }
 
     update(deltaTime) {
-        if (!deltaTime) return;
 
         this.position.x += this.speed;
 

@@ -20,7 +20,6 @@ class Game {
         requestAnimationFrame(this.gameLoop)
     }
     
-    // document.addEventListener("keyup", board.keyUpHandler, false);
 
 
 }
