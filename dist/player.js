@@ -5,11 +5,10 @@ class Player {
     }
 
     draw(x, y, width, height) {
-        this.ctx.beginPath();
-        this.ctx.rect(x, y, width, height);
-        this.ctx.fillStyle = "#0095DD";
-        this.ctx.fill();
-        this.ctx.closePath();
+        let player = new Image();
+        player.src = 'src/images/player.png'
+            this.ctx.drawImage(player, x, y, width, height);
+            this.ctx.beginPath();
     }
 }
 

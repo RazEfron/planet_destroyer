@@ -5,7 +5,6 @@ class Bubble {
     }
 
     draw(x, y, radius) {
-        debugger
         this.ctx.beginPath();
         this.ctx.arc(x, y, radius, 0, Math.PI * 2);
         this.ctx.fillStyle = "#0095DD";

@@ -5,75 +5,74 @@ class Board {
     constructor(canvas, ctx) {
         this.canvas = canvas;
         this.ctx = ctx;
-        this.draw = this.draw.bind(this);
+        this.drawGame = this.drawGame.bind(this);
+        this.drawBackground = this.drawBackground.bind(this);
         this.keyDownHandler = this.keyDownHandler.bind(this);
         this.keyUpHandler = this.keyUpHandler.bind(this);
+        this.playerBallColision = this.playerBallColision.bind(this);
 
         //bubble
         this.bubble = new Bubble(canvas, ctx)
         this.bubbleX = canvas.width / 2;
-        this.bubbleY = canvas.height - 30;
-        this.bubbleDX = 2;
-        this.bubbleDY = -2;
-        this.ballRadius = 10;
+        this.bubbleY = 50;
+        this.bubbleDX = 5;
+        this.bubbleDY = 0;
+        this.ballRadius = 40;
+        this.gravity = 0.1;
+        this.gravitySpeed = 0;
+        this.bounce = 1.001;
+        
 
         //player
         this.player = new Player(canvas, ctx)
-        this.paddleHeight = 10;
-        this.paddleWidth = 75;
-        this.paddleX = (canvas.width - this.paddleWidth) / 2;
+        this.playerHeight = 180;
+        this.playerWidth = 180;
+        this.playerX = (canvas.width - this.playerWidth) / 2;
         this.rightPressed = false;
         this.leftPressed = false;
-
-        this.interval = setInterval(this.draw, 10)
+        this.interval = setInterval(this.drawGame, 10)
     }
 
-    draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    drawBackground() {
+        debugger
+        let background = new Image();
+        background.src = 'src/images/background_level_one.jpg'
+        this.ctx.drawImage(background, 0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.beginPath();
+    }
 
+    drawGame() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        //background
+        this.drawBackground()
         //bubble
         this.bubble.draw(this.bubbleX, this.bubbleY, this.ballRadius)
-        this.bubbleX += this.bubbleDX
-        this.bubbleY += this.bubbleDY
+        this.gravitySpeed += this.gravity;
+        this.bubbleX += this.bubbleDX;
+        this.bubbleY += this.bubbleDY + this.gravitySpeed;
+        let rockbottom = this.canvas.height - this.ballRadius;
+        if (this.bubbleY > rockbottom) {
+            this.bubbleY = rockbottom;
+            this.gravitySpeed = -(this.gravitySpeed * this.bounce);
+        }
         if (this.bubbleX + this.bubbleDX > this.canvas.width - this.ballRadius || this.bubbleX + this.bubbleDX < this.ballRadius) {
             this.bubbleDX = -this.bubbleDX;
         }
-        if (this.bubbleY + this.bubbleDY > this.canvas.height - this.ballRadius || this.bubbleY + this.bubbleDY < this.ballRadius) {
-            this.bubbleDY = -this.bubbleDY;
-        }
-
-        // this.gravity = 0.6;
-        // this.gravitySpeed = 0;
-        // this.bounce = 1;
-        // this.newPos = function () {
-        //     this.gravitySpeed += this.gravity;
-        //     this.x += this.speedX;
-        //     this.y += this.speedY + this.gravitySpeed;
-        //     this.hitBottom();
-        // }
-        // this.hitBottom = function () {
-        //     var rockbottom = myGameArea.canvas.height - this.height;
-        //     if (this.y > rockbottom) {
-        //         this.y = rockbottom;
-        //         this.gravitySpeed = -(this.gravitySpeed * this.bounce);
-        //     }
-
-
 
         //player
         if (this.rightPressed) {
-            this.paddleX += 7;
-            if (this.paddleX + this.paddleWidth > this.canvas.width) {
-                this.paddleX = this.canvas.width - this.paddleWidth;
+            this.playerX += 7;
+            if (this.playerX + this.playerWidth > this.canvas.width) {
+                this.playerX = this.canvas.width - this.playerWidth;
             }
         }
         else if (this.leftPressed) {
-            this.paddleX -= 7;
-            if (this.paddleX < 0) {
-                this.paddleX = 0;
+            this.playerX -= 7;
+            if (this.playerX < 0) {
+                this.playerX = 0;
             }
         }
-        this.player.draw(this.paddleX, this.canvas.height - this.paddleHeight, this.paddleWidth, this.paddleHeight)
+        this.player.draw(this.playerX, this.canvas.height - 132, this.playerWidth, this.playerHeight)
     }
 
     keyDownHandler(e) {
@@ -92,7 +91,11 @@ class Board {
         else if (e.key == "Left" || e.key == "ArrowLeft") {
             this.leftPressed = false;
         }
-}
+    }
+
+    playerBallColision() {
+        
+    }
 }
 
 
