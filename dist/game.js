@@ -5,15 +5,22 @@ class Game {
     constructor(canvas, ctx) {
         this.canvas = canvas;
         this.ctx = ctx
+        this.lastTime = 0;
+        this.board = new Board(this.canvas, this.ctx)
+        this.gameLoop = this.gameLoop.bind(this);
     }
     
-    gameLoop() {
-        board = new Board(this.canvas, this.ctx)
-        document.addEventListener("keydown", board.keyDownHandler, false);
-        document.addEventListener("keyup", board.keyUpHandler, false);
-    }
+    gameLoop(timeStamp) {
+        let deltaTime = timeStamp - this.lastTime;
+        this.lastTime = timeStamp;
 
+        this.board.updateGame(deltaTime) 
+        this.board.drawGame()
+
+        requestAnimationFrame(this.gameLoop)
+    }
     
+    // document.addEventListener("keyup", board.keyUpHandler, false);
 
 
 }
