@@ -1,6 +1,5 @@
 Bubble = require('./bubble');
 Player = require('../dist/player');
-InputHandler = require('../dist/input_handle');
 
 class Board {
     constructor(canvas, ctx) {
@@ -15,7 +14,6 @@ class Board {
         
         //player
         this.player = new Player(canvas, ctx)
-        this.inputHandler = new InputHandler(this.player)
     }
 
     drawBackground() {
@@ -30,6 +28,7 @@ class Board {
         this.drawBackground()
         this.bubble.draw()
         this.player.draw()
+        
     }
 
     updateGame(deltaTime) {

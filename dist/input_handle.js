@@ -1,19 +1,38 @@
 class InputHandler {
-    constructor(player) {
+    constructor(player, game) {
 
         document.addEventListener("keydown", e => {
-            if (e.key == "Right" || e.key == "ArrowRight") {
-                player.moveRight();
-            } else if (e.key == "Left" || e.key == "ArrowLeft") {
-                player.moveLeft();
+            debugger
+            switch (e.key) {
+                case ("ArrowRight"):
+                    player.moveRight();
+                    break;
+
+                case ("ArrowLeft"):
+                    player.moveLeft();
+                    break;
+
+                case ("p"): 
+                    game.togglePause()
+                default:
+                    break;
             }
         })
 
         document.addEventListener("keyup", e => {
-            if (e.key == "Right" || e.key == "ArrowRight") {
-                if (player.speed > 0) player.stop();
-            } else if (e.key == "Left" || e.key == "ArrowLeft") {
-                if (player.speed < 0) player.stop();
+            switch (e.key) {
+                case ("ArrowRight"):
+                    if (player.speed > 0) player.stop();
+                    break;
+
+                case ("ArrowLeft"):
+                    if (player.speed < 0) player.stop();
+                    break;
+
+                case ("Escape"): 
+
+                default:
+                    break;
             }
         })
     } 
