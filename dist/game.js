@@ -130,7 +130,9 @@ class Game {
     }
 
     shoot() {
-        this.shots.push(new Laser(this.canvas, this.ctx, this))
+        if (this.gameState === GAMESTATE.RUNNING) {
+            this.shots.push(new Laser(this.canvas, this.ctx, this))
+        }
     }
 
     // stopShooting() {

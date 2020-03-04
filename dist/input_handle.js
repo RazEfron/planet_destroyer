@@ -1,5 +1,6 @@
 class InputHandler {
     constructor(player, game) {
+        this.locked = false
 
         document.addEventListener("keydown", e => {
             debugger
@@ -19,7 +20,10 @@ class InputHandler {
                     game.start()
                     break
                 case (" "):
-                    game.shoot()
+                    if (this.locked) return
+                        game.shoot()
+                    this.locked = true
+                    setTimeout(() => { this.locked = false; }, 1000); 
                     break
                 default:
                     break;
