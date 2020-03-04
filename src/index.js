@@ -8,9 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     
     gameLoop = (timeStamp) => {
-        let deltaTime = timeStamp - lastTime;
         lastTime = timeStamp;
-        game.update(deltaTime);
+        game.update();
         game.draw();
         requestAnimationFrame(gameLoop);
     }

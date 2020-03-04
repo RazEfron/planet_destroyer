@@ -17,6 +17,10 @@ class InputHandler {
                     break
                 case ("n"):
                     game.start()
+                    break
+                case (" "):
+                    game.shoot()
+                    break
                 default:
                     break;
             }
@@ -32,7 +36,9 @@ class InputHandler {
                     if (player.speed < 0) player.stop();
                     break;
 
-                case ("Escape"): 
+                // case (" "):
+                //     game.stopShooting();
+                //     break 
 
                 default:
                     break;

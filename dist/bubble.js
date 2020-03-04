@@ -21,7 +21,7 @@ class Bubble {
         let bubble = document.getElementById("planet-one")
         this.ctx.drawImage(bubble, this.x, this.y, this.width * .7, this.height * .7);
         this.ctx.globalCompositeOperation = 'destination-in';
-        this.ctx.arc(75, 75, 50, 0, Math.PI * 2);
+        this.ctx.arc(0, 0, 50, 0, Math.PI * 2);
         this.ctx.globalCompositeOperation = 'source-over';
     }
 

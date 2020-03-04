@@ -32,7 +32,7 @@ class Player {
 
     }
 
-    update(deltaTime) {
+    update() {
 
         this.position.x += this.speed;
 

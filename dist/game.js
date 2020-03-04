@@ -1,5 +1,6 @@
 Board = require('../dist/board');
 InputHandler = require('../dist/input_handle');
+Laser = require('../dist/laser');
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -24,8 +25,9 @@ class Game {
         this.togglePause = this.togglePause.bind(this);
         this.loseLife = this.loseLife.bind(this);
         this.gameOver = this.gameOver.bind(this);
+        this.shoot = this.shoot.bind(this);
 
-
+        this.shots = []
     }
     
     start() {
@@ -77,7 +79,7 @@ class Game {
         }
     }
 
-    update(deltaTime) {
+    update() {
         if (this.gameState === GAMESTATE.PAUSED || 
             this.gameState === GAMESTATE.GAMEOVER ||
             this.gameState === GAMESTATE.MENU) {
@@ -87,7 +89,7 @@ class Game {
         this.count += 1;
         this.collision();
         this.gameOver();
-        this.board.updateGame(deltaTime);
+        this.board.updateGame();
     }
     
     collision() {
@@ -126,6 +128,14 @@ class Game {
             this.gameState = GAMESTATE.GAMEOVER
         }
     }
+
+    shoot() {
+        this.shots.push(new Laser(this.canvas, this.ctx, this))
+    }
+
+    // stopShooting() {
+    //     this.shooting = false;
+    // }
 }
 
 module.exports = Game;
