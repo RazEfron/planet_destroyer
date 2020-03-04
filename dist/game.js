@@ -15,7 +15,7 @@ class Game {
         this.ctx = ctx;
         this.gameState = GAMESTATE.MENU;
         this.board = new Board(this.canvas, this.ctx, this);
-        this.handleInput = new InputHandler(this.board.player, this);
+        this.handleInput = new InputHandler(this);
         this.lives = [0, 1, 2, 3, 4];
 
         this.start = this.start.bind(this);
@@ -38,7 +38,7 @@ class Game {
         if (this.gameState === GAMESTATE.GAMEOVER) {
             this.lives = [0, 1, 2, 3, 4];
             this.board = new Board(this.canvas, this.ctx, this);
-            this.handleInput.player = this.board.player;
+            // this.handleInput.player = this.board.player;
             // this.handleInput = null;
             // this.handleInput = new InputHandler(this.board.player, this);
             this.gameState = GAMESTATE.RUNNING;
@@ -121,7 +121,7 @@ class Game {
     loseLife() {
         this.lives.pop();
         this.board = new Board(this.canvas, this.ctx, this);
-        this.handleInput.player = this.board.player;
+        // this.handleInput.player = this.board.player;
         // this.handleInput = null;
         // this.handleInput = new InputHandler(this.board.player, this);
         this.gameState = GAMESTATE.RUNNING;

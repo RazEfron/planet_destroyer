@@ -1,16 +1,16 @@
 class InputHandler {
-    constructor(player, game) {
+    constructor(game) {
         this.locked = false
 
         document.addEventListener("keydown", e => {
             debugger
             switch (e.key) {
                 case ("ArrowRight"):
-                    player.moveRight();
+                    game.board.player.moveRight();
                     break;
 
                 case ("ArrowLeft"):
-                    player.moveLeft();
+                    game.board.player.moveLeft();
                     break;
 
                 case ("p"): 
@@ -33,11 +33,11 @@ class InputHandler {
         document.addEventListener("keyup", e => {
             switch (e.key) {
                 case ("ArrowRight"):
-                    if (player.speed > 0) player.stop();
+                    if (game.board.player.speed > 0) game.board.player.stop();
                     break;
 
                 case ("ArrowLeft"):
-                    if (player.speed < 0) player.stop();
+                    if (game.board.player.speed < 0) game.board.player.stop();
                     break;
 
                 // case (" "):
