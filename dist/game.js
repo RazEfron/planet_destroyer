@@ -6,33 +6,88 @@ const GAMESTATE = {
     RUNNING: 1,
     MENU: 2,
     GAMEOVER: 3
-}
+};
 
 class Game {
     constructor(canvas, ctx) {
         this.canvas = canvas;
-        this.ctx = ctx
-        this.lastTime = 0;
-        this.board = new Board(this.canvas, this.ctx)
-        this.gameLoop = this.gameLoop.bind(this);
+        this.ctx = ctx;
+        this.gameState = GAMESTATE.MENU;
+        this.board = new Board(this.canvas, this.ctx, this);
+        new InputHandler(this.board.player, this);
+        this.lives = [0, 1, 2, 3, 4];
+
+        this.start = this.start.bind(this);
+        this.draw = this.draw.bind(this);
+        this.update = this.update.bind(this);
+        this.collision = this.collision.bind(this);
         this.togglePause = this.togglePause.bind(this);
-        this.gameState = 1;
+        this.loseLife = this.loseLife.bind(this);
+        this.gameOver = this.gameOver.bind(this);
+
+
+    }
+    
+    start() {
+        debugger
+        if (this.gameState === GAMESTATE.MENU) {
+            this.gameState = GAMESTATE.RUNNING;
+        }
+
+        if (this.gameState === GAMESTATE.GAMEOVER) {
+            this.lives = [0, 1, 2, 3, 4];
+            this.board = new Board(this.canvas, this.ctx, this);
+            new InputHandler(this.board.player, this);
+            this.gameState = GAMESTATE.RUNNING;
+        }
+        
     }
 
     draw() {
         this.board.drawGame();
+        if (this.gameState === GAMESTATE.MENU) {
+            this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.fillStyle = "rgba(0,0,0,0.5)";
+            this.ctx.fill();
+            this.ctx.font = "30px Arial";
+            this.ctx.fillStyle = "white";
+            this.ctx.textAlign = "center";
+            this.ctx.fillText("Press N to start a new game", this.canvas.width / 2, this.canvas.height / 2);
+        }
+        if (this.gameState === GAMESTATE.PAUSED) {
+            debugger
+            this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.fillStyle = "rgba(0,0,0,0.5)";
+            this.ctx.fill();
+            this.ctx.font = "30px Arial";
+            this.ctx.fillStyle = "white";
+            this.ctx.textAlign = "center";
+            this.ctx.fillText("Paused", this.canvas.width / 2, this.canvas.height / 2);
+        }
+        if (this.gameState === GAMESTATE.GAMEOVER) {
+            debugger
+            this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.fillStyle = "rgba(0,0,0,1)";
+            this.ctx.fill();
+            this.ctx.font = "30px Arial";
+            this.ctx.fillStyle = "white";
+            this.ctx.textAlign = "center";
+            this.ctx.fillText("GAME OVER", this.canvas.width / 2, this.canvas.height / 2);
+            this.ctx.fillText("Press N to start a new game", this.canvas.width / 2, this.canvas.height / 2 + 100);
+        }
     }
 
-    update() {
-        this.board.updateGame(deltaTime);
-    }
-    
-    gameLoop(timeStamp) {
-        let deltaTime = timeStamp - this.lastTime;
-        this.lastTime = timeStamp;
+    update(deltaTime) {
+        if (this.gameState === GAMESTATE.PAUSED || 
+            this.gameState === GAMESTATE.GAMEOVER ||
+            this.gameState === GAMESTATE.MENU) {
+            // debugger;
+            return  ;
+        } 
+        this.count += 1;
         this.collision();
-        new InputHandler(this.board.player, this);
-        requestAnimationFrame(this.gameLoop);
+        this.gameOver();
+        this.board.updateGame(deltaTime);
     }
     
     collision() {
@@ -42,22 +97,35 @@ class Game {
         leftOfPlayer = player.position.x + 35;
         rightOfPlayer = leftOfPlayer + player.width - 105;
         leftOfBubble = bubble.x + 35;
-        rightOfBubble = leftOfBubble + 135
+        rightOfBubble = leftOfBubble + 135;
         if (bubbleBottom >= topPlayer) {
             if ((leftOfPlayer >= leftOfBubble && leftOfPlayer <= rightOfBubble) || (rightOfPlayer <= rightOfBubble && rightOfPlayer >= leftOfBubble)) {
-                console.log("colision")
+                this.loseLife();
             }
         }
     }
 
     togglePause() {
+        debugger
         if (this.gameState === GAMESTATE.PAUSED) {
-            this.gameState = GAMESTATE.RUNNING
-        } else {
-            this.gameState = GAMESTATE.PAUSED
+            this.gameState = GAMESTATE.RUNNING;
+        } else if (this.gameState === GAMESTATE.RUNNING) {
+            this.gameState = GAMESTATE.PAUSED;
         }
     }
 
+    loseLife() {
+        this.lives.pop();
+        this.board = new Board(this.canvas, this.ctx, this);
+        new InputHandler(this.board.player, this);
+        this.gameState = GAMESTATE.RUNNING;
+    }
+
+    gameOver() {
+        if (this.lives.length === 0) {
+            this.gameState = GAMESTATE.GAMEOVER
+        }
+    }
 }
 
 module.exports = Game;

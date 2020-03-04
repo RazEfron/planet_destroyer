@@ -2,10 +2,10 @@ Bubble = require('./bubble');
 Player = require('../dist/player');
 
 class Board {
-    constructor(canvas, ctx) {
+    constructor(canvas, ctx, game) {
         this.canvas = canvas;
         this.ctx = ctx;
-
+        this.game = game;
         this.drawGame = this.drawGame.bind(this);
         this.drawBackground = this.drawBackground.bind(this);
 
@@ -28,7 +28,7 @@ class Board {
         this.drawBackground()
         this.bubble.draw()
         this.player.draw()
-        
+        this.drawLives()
     }
 
     updateGame(deltaTime) {
@@ -36,7 +36,15 @@ class Board {
         this.bubble.update(deltaTime)
     }
 
-
+    drawLives() {
+        let heart = new Image();
+        heart.src = 'src/images/heart.png'
+        this.game.lives.forEach(heartCount => {
+            this.ctx.drawImage(heart, heartCount * 40, 0, 100, 100);
+            this.ctx.beginPath();
+            
+        });
+    }
 }
 
 

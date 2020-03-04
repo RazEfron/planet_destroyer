@@ -14,6 +14,9 @@ class InputHandler {
 
                 case ("p"): 
                     game.togglePause()
+                    break
+                case ("n"):
+                    game.start()
                 default:
                     break;
             }
