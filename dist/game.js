@@ -15,7 +15,7 @@ class Game {
         this.ctx = ctx;
         this.gameState = GAMESTATE.MENU;
         this.board = new Board(this.canvas, this.ctx, this);
-        new InputHandler(this.board.player, this);
+        this.handleInput = new InputHandler(this.board.player, this);
         this.lives = [0, 1, 2, 3, 4];
 
         this.start = this.start.bind(this);
@@ -38,7 +38,9 @@ class Game {
         if (this.gameState === GAMESTATE.GAMEOVER) {
             this.lives = [0, 1, 2, 3, 4];
             this.board = new Board(this.canvas, this.ctx, this);
-            new InputHandler(this.board.player, this);
+            this.handleInput.player = this.board.player;
+            // this.handleInput = null;
+            // this.handleInput = new InputHandler(this.board.player, this);
             this.gameState = GAMESTATE.RUNNING;
         }
         
@@ -56,7 +58,7 @@ class Game {
             this.ctx.fillText("Press N to start a new game", this.canvas.width / 2, this.canvas.height / 2);
         }
         if (this.gameState === GAMESTATE.PAUSED) {
-            
+            debugger
             this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
             this.ctx.fillStyle = "rgba(0,0,0,0.5)";
             this.ctx.fill();
@@ -82,6 +84,7 @@ class Game {
         if (this.gameState === GAMESTATE.PAUSED || 
             this.gameState === GAMESTATE.GAMEOVER ||
             this.gameState === GAMESTATE.MENU) {
+            debugger
             return  ;
         } 
         this.count += 1;
@@ -107,7 +110,7 @@ class Game {
     }
 
     togglePause() {
-        
+        debugger;
         if (this.gameState === GAMESTATE.PAUSED) {
             this.gameState = GAMESTATE.RUNNING;
         } else if (this.gameState === GAMESTATE.RUNNING) {
@@ -118,7 +121,9 @@ class Game {
     loseLife() {
         this.lives.pop();
         this.board = new Board(this.canvas, this.ctx, this);
-        new InputHandler(this.board.player, this);
+        this.handleInput.player = this.board.player;
+        // this.handleInput = null;
+        // this.handleInput = new InputHandler(this.board.player, this);
         this.gameState = GAMESTATE.RUNNING;
     }
 
