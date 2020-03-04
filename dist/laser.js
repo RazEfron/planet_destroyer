@@ -1,6 +1,5 @@
 class Laser {
     constructor(canvas, ctx, game) {
-        debugger
         this.canvas = canvas;
         this.ctx = ctx;
         this.game = game;

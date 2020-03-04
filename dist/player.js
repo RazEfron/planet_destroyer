@@ -11,7 +11,7 @@ class Player {
 
         this.position = {
             x: this.canvas.width / 2 - this.width / 2,
-            y: this.canvas.height - this.height + 35
+            y: this.canvas.height - this.height + 40
         }
     }
 

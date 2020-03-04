@@ -31,7 +31,6 @@ class Game {
     }
     
     start() {
-        debugger
         if (this.gameState === GAMESTATE.MENU) {
             this.gameState = GAMESTATE.RUNNING;
         }
@@ -57,7 +56,7 @@ class Game {
             this.ctx.fillText("Press N to start a new game", this.canvas.width / 2, this.canvas.height / 2);
         }
         if (this.gameState === GAMESTATE.PAUSED) {
-            debugger
+            
             this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
             this.ctx.fillStyle = "rgba(0,0,0,0.5)";
             this.ctx.fill();
@@ -67,7 +66,7 @@ class Game {
             this.ctx.fillText("Paused", this.canvas.width / 2, this.canvas.height / 2);
         }
         if (this.gameState === GAMESTATE.GAMEOVER) {
-            debugger
+            
             this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
             this.ctx.fillStyle = "rgba(0,0,0,1)";
             this.ctx.fill();
@@ -83,7 +82,6 @@ class Game {
         if (this.gameState === GAMESTATE.PAUSED || 
             this.gameState === GAMESTATE.GAMEOVER ||
             this.gameState === GAMESTATE.MENU) {
-            // debugger;
             return  ;
         } 
         this.count += 1;
@@ -94,7 +92,7 @@ class Game {
     
     collision() {
         const { player, bubble } = this.board;
-        let bubbleBottom = bubble.y + 175;
+        let bubbleBottom = bubble.y + 145;
         let topPlayer = player.position.y + 30;
         leftOfPlayer = player.position.x + 35;
         rightOfPlayer = leftOfPlayer + player.width - 105;
@@ -102,13 +100,14 @@ class Game {
         rightOfBubble = leftOfBubble + 135;
         if (bubbleBottom >= topPlayer) {
             if ((leftOfPlayer >= leftOfBubble && leftOfPlayer <= rightOfBubble) || (rightOfPlayer <= rightOfBubble && rightOfPlayer >= leftOfBubble)) {
+                debugger
                 this.loseLife();
             }
         }
     }
 
     togglePause() {
-        debugger
+        
         if (this.gameState === GAMESTATE.PAUSED) {
             this.gameState = GAMESTATE.RUNNING;
         } else if (this.gameState === GAMESTATE.RUNNING) {
