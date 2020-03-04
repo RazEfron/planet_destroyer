@@ -119,6 +119,19 @@ class Game {
         if (distanceLeft <= radius || distanceRight <= radius || distanceMiddle <= radius) {
             debugger
         }
+        this.shots.forEach(shot => {
+            // debugger
+            //cheking laser and bubble collision
+            const laserPointX = shot.x + 13
+            const laserPointY = shot.y + 7
+            const distLaserX = laserPointX - bubbleCenterX;
+            const distLaserY = laserPointY - bubbleCenterY;
+            const distanceLaserPoint = Math.hypot(distLaserX, distLaserY)
+
+            if (distanceLaserPoint <= radius) {
+                debugger
+            }
+        })
     }
 
     togglePause() {

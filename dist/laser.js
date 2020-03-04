@@ -17,6 +17,7 @@ class Laser {
         laser.src = 'src/images/laser.png'
         this.ctx.beginPath();
         this.ctx.drawImage(laser, this.x, this.y, 30, 90);
+        this.ctx.strokeRect(this.x, this.y, 30, 90)
         this.ctx.closePath();
     }
 
