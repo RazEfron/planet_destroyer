@@ -3,7 +3,6 @@ class InputHandler {
         this.locked = false
 
         document.addEventListener("keydown", e => {
-            debugger
             switch (e.key) {
                 case ("ArrowRight"):
                     game.board.player.moveRight();

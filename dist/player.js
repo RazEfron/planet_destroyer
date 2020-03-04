@@ -3,8 +3,8 @@ class Player {
         this.canvas = canvas;
         this.ctx = ctx;
 
-        this.width = 180; // 110
-        this.height = 180; // 110
+        this.width = 180; 
+        this.height = 180; // 80
 
         this.maxSpeed = 10;
         this.speed = 0
