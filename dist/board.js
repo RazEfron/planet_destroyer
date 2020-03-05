@@ -11,7 +11,9 @@ class Board {
         this.drawBackground = this.drawBackground.bind(this);
 
         //bubble
-        this.bubble = new Bubble(canvas, ctx);
+        // this.bubble = new Bubble(canvas, ctx, {
+
+        // });
         
         //player
         this.player = new Player(canvas, ctx);
@@ -27,7 +29,7 @@ class Board {
     drawGame() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.drawBackground();
-        this.bubble.draw();
+        this.game.bubbles.forEach(bubble => bubble.draw(bubble.size))
         this.player.draw();
         this.drawLives();
         this.game.lasers.forEach(shot => shot.draw())
@@ -35,7 +37,7 @@ class Board {
 
     updateGame() {
         this.player.update();
-        this.bubble.update();
+        this.game.bubbles.forEach(bubble => bubble.update())
         this.game.lasers.forEach(shot => shot.update())
     }
 

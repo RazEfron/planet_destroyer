@@ -19,10 +19,10 @@ class InputHandler {
                     game.start()
                     break
                 case (" "):
-                    if (this.locked) return
+                    // if (this.locked) return
                         game.shoot()
-                    this.locked = true
-                    setTimeout(() => { this.locked = false; }, 1000); 
+                    // this.locked = true
+                    // setTimeout(() => { this.locked = false; }, 1000); 
                     break
                 default:
                     break;
