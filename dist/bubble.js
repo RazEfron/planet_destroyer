@@ -1,14 +1,14 @@
 class Bubble {
-    constructor(canvas, ctx) {
+    constructor(canvas, ctx, x = canvas.width / 2, y = 50, bubbleDX = 5) {
         this.canvas = canvas
         this.ctx = ctx
 
-        this.x = canvas.width / 2;
-        this.y = 50;
-        this.height = 300 // 210 135
-        this.width = 300 // 210 135
+        this.x = x;
+        this.y = y;
+        this.height = 300 
+        this.width = 300 
 
-        this.bubbleDX = 5;
+        this.bubbleDX = bubbleDX;
         this.bubbleDY = 0;
         this.gravity = 0.1;
         this.gravitySpeed = 0;
@@ -16,7 +16,7 @@ class Bubble {
 
     }
 
-    draw() {
+    draw(size) {
         
         let bubble = document.getElementById("planet-one")
         this.ctx.drawImage(bubble, this.x, this.y, this.width * .7, this.height * .7);

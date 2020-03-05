@@ -1,6 +1,7 @@
 Board = require('../dist/board');
 InputHandler = require('../dist/input_handle');
 Laser = require('../dist/laser');
+Bubble = require('./bubble');
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -16,8 +17,7 @@ class Game {
         this.gameState = GAMESTATE.MENU;
         this.board = new Board(this.canvas, this.ctx, this);
         this.handleInput = new InputHandler(this);
-        this.lives = [0, 1, 2, 3, 4];
-
+        
         this.start = this.start.bind(this);
         this.draw = this.draw.bind(this);
         this.update = this.update.bind(this);
@@ -26,8 +26,10 @@ class Game {
         this.loseLife = this.loseLife.bind(this);
         this.gameOver = this.gameOver.bind(this);
         this.shoot = this.shoot.bind(this);
-
-        this.shots = []
+        
+        this.lives = [0, 1, 2, 3, 4];
+        this.lasers = []
+        this.bubbles = [{size: 4}]
     }
     
     start() {
@@ -38,9 +40,6 @@ class Game {
         if (this.gameState === GAMESTATE.GAMEOVER) {
             this.lives = [0, 1, 2, 3, 4];
             this.board = new Board(this.canvas, this.ctx, this);
-            // this.handleInput.player = this.board.player;
-            // this.handleInput = null;
-            // this.handleInput = new InputHandler(this.board.player, this);
             this.gameState = GAMESTATE.RUNNING;
         }
         
@@ -117,9 +116,9 @@ class Game {
         const distMidY = playerY - bubbleCenterY;
         const distanceMiddle = Math.hypot(distMidX, distMidY)
         if (distanceLeft <= radius || distanceRight <= radius || distanceMiddle <= radius) {
-            debugger
+            this.loseLife()
         }
-        this.shots.forEach(shot => {
+        this.lasers.forEach(shot => {
             // debugger
             //cheking laser and bubble collision
             const laserPointX = shot.x + 13
@@ -145,9 +144,6 @@ class Game {
     loseLife() {
         this.lives.pop();
         this.board = new Board(this.canvas, this.ctx, this);
-        // this.handleInput.player = this.board.player;
-        // this.handleInput = null;
-        // this.handleInput = new InputHandler(this.board.player, this);
         this.gameState = GAMESTATE.RUNNING;
     }
 
@@ -159,13 +155,10 @@ class Game {
 
     shoot() {
         if (this.gameState === GAMESTATE.RUNNING) {
-            this.shots.push(new Laser(this.canvas, this.ctx, this))
+            this.lasers.push(new Laser(this.canvas, this.ctx, this))
         }
     }
 
-    // stopShooting() {
-    //     this.shooting = false;
-    // }
 }
 
 module.exports = Game;

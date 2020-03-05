@@ -15,9 +15,6 @@ class Board {
         
         //player
         this.player = new Player(canvas, ctx);
-
-        //laser
-        // this.laser = new Laser(canvas, ctx, this);
     }
 
     drawBackground() {
@@ -33,13 +30,13 @@ class Board {
         this.bubble.draw();
         this.player.draw();
         this.drawLives();
-        this.game.shots.forEach(shot => shot.draw())
+        this.game.lasers.forEach(shot => shot.draw())
     }
 
     updateGame() {
         this.player.update();
         this.bubble.update();
-        this.game.shots.forEach(shot => shot.update())
+        this.game.lasers.forEach(shot => shot.update())
     }
 
     drawLives() {
