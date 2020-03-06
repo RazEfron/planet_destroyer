@@ -132,7 +132,6 @@ class Game {
                     console.log('collision')
                     gift.delete = true;
                     if (gift.randomNumber >= 980 && this.lives.length < 5) {//lives
-                        debugger
                       this.lives.push(1)
                     } else if (gift.randomNumber >= 850) {//coinBag
                         this.score += 750
@@ -222,7 +221,10 @@ class Game {
 
     shoot() {
         if (this.gameState === GAMESTATE.RUNNING) {
-                this.lasers.push(new Laser(this.canvas, this.ctx, this))
+            debugger
+            let laser = new Laser(this.canvas, this.ctx, this)
+            // laser.sound.play()
+                this.lasers.push(laser)
         }
     }
 

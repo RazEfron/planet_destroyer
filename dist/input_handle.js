@@ -1,7 +1,7 @@
 class InputHandler {
     constructor(game) {
         this.locked = false
-
+        this.sound = new Audio("/Users/razefron/Desktop/bubble_trouble/src/sounds/shooting.mp3");
         document.addEventListener("keydown", e => {
             switch (e.key) {
                 case ("ArrowRight"):
@@ -19,6 +19,7 @@ class InputHandler {
                     game.start()
                     break
                 case (" "):
+                    this.sound.play()
                     if (this.locked) return
                         game.shoot()
                     this.locked = true

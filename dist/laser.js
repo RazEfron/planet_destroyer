@@ -10,8 +10,7 @@ class Laser {
         this.draw = this.draw.bind(this);
         this.update = this.update.bind(this);
 
-        this.sound = new sound("/Users/razefron/Desktop/bubble_trouble/src/sounds/burp.mp3");
-
+        
     }
 
     draw() {
