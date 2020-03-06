@@ -4,7 +4,7 @@ class Player {
         this.ctx = ctx;
 
         this.width = 135; 
-        this.height = 135; // 80
+        this.height = 135; 
 
         this.maxSpeed = 10;
         this.speed = 0

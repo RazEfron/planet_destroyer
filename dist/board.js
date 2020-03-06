@@ -29,24 +29,34 @@ class Board {
     drawGame() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.drawBackground();
-        this.game.bubbles.forEach(bubble => bubble.draw(bubble.size))
+        this.game.bubbles.forEach(bubble => bubble.draw(bubble.size));
         this.player.draw();
         this.drawLives();
-        this.game.lasers.forEach(shot => shot.draw())
-        this.drawText()
+        this.game.lasers.forEach(shot => shot.draw());
+        this.drawText();
+        this.game.gifts.forEach(gift => {
+            if (!gift.delete) {
+                gift.draw()
+            }
+        });
     }
 
     updateGame() {
         this.player.update();
-        this.game.bubbles.forEach(bubble => bubble.update())
-        this.game.lasers.forEach(shot => shot.update())
+        this.game.bubbles.forEach(bubble => bubble.update());
+        this.game.lasers.forEach(shot => shot.update());
+        this.game.gifts.forEach(gift => {
+            if (!gift.delete) {
+                gift.update()
+            }
+        });
     }
 
     drawLives() {
         let heart = new Image();
         heart.src = 'src/images/heart.png';
-        this.game.lives.forEach(heartCount => {
-            this.ctx.drawImage(heart, 620 + heartCount * 40, 0, 100, 100);
+        this.game.lives.forEach((heartCount, idx) => {
+            this.ctx.drawImage(heart, 620 + idx * 40, 0, 100, 100);
         });
     }
 
@@ -56,7 +66,11 @@ class Board {
         this.ctx.fillText(`High Score: ${this.game.score}`, 40, 50);
         this.ctx.font = "20px Arial";
         this.ctx.textAlign = "center";
-        this.ctx.fillText(`Level ${this.game.currentLevel}`, this.canvas.width / 2, 30)
+        this.ctx.fillText(`Level ${this.game.currentLevel}`, this.canvas.width / 2, 30);
+    }
+
+    drawGifts() {
+
     }
 }
 

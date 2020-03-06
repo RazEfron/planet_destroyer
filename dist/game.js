@@ -3,7 +3,7 @@ InputHandler = require('../dist/input_handle');
 Laser = require('../dist/laser');
 Bubble = require('./bubble');
 Level = require('./levels');
-Gifts = require('./gifts');
+Gift = require('./gifts');
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -31,7 +31,7 @@ class Game {
         this.createBubbles = this.createBubbles.bind(this);
         this.explodeBubble = this.explodeBubble.bind(this);
         
-        this.lives = [4, 3, 2, 1, 0];
+        this.lives = [1, 1, 1];
         this.lasers = []
         this.levels = new Level(this)
         this.currentLevel = 1
@@ -41,6 +41,7 @@ class Game {
 
         this.score = 0
         this.gifts = []
+        
     }
     
     start() {
@@ -112,6 +113,11 @@ class Game {
         this.collision();
         this.gameOver();
         this.board.updateGame();
+        this.gifts.forEach((gift, idx) => {
+            if (gift.delete) {
+                this.gifts.splice(idx, 1)
+            }
+        })
     }
     
     collision() {
@@ -119,6 +125,26 @@ class Game {
         const playerX = player.position.x + 35;
         const playerY = player.position.y + 65;
         const rightPointPlayerX = playerX + 73;
+
+        this.gifts.forEach(gift => {
+            if (gift.y + gift.height / 2 >= playerY) {
+                if ((gift.x >= playerX && gift.x <= rightPointPlayerX) || (gift.x + gift.width >= playerX && gift.x + gift.width <= rightPointPlayerX)) {
+                    console.log('collision')
+                    gift.delete = true;
+                    if (gift.randomNumber >= 980 && this.lives.length < 5) {//lives
+                        debugger
+                      this.lives.push(1)
+                    } else if (gift.randomNumber >= 850) {//coinBag
+                        this.score += 750
+                    } else if (gift.randomNumber >= 650) {// coinStack
+                        this.score += 500
+                    }
+                    else if (gift.randomNumber >= 450){// goldCoin
+                        this.score += 100
+                    }
+                }
+            }
+        })
 
         this.bubbles.some((bubble, idx) => {
             let radius = bubble.width / 4.5;
@@ -158,8 +184,6 @@ class Game {
                 const distanceLaserMidPoint = Math.hypot(distLaserX, distLaserMidY)
                 
                 if (distanceLaserUpperPoint <= radius || distanceLaserDownPoint <= radius || distanceLaserMidPoint <= radius) {
-                    
-                    console.log("collision")
                     this.explodeBubble(bubble, idx)
                 }
             })
@@ -190,7 +214,6 @@ class Game {
 
     gameOver() {
         if (this.lives.length === 0) {
-            debugger
             this.gameState = GAMESTATE.GAMEOVER;
             this.currentLevel = 1;
             this.restartLevel()
@@ -292,6 +315,7 @@ class Game {
         if (this.level.length === 0) {
             this.levelCleared();
         }
+        this.dropGift(bubble.x, bubble.y)
         this.createBubbles();
     }
     
@@ -304,6 +328,7 @@ class Game {
 
     dropGift(x, y) {
         this.gifts.push(new Gift(x, y, this))
+        
     }
 }
 
