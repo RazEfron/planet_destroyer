@@ -15,20 +15,20 @@ class Gifts {
                 heart.src = 'src/images/heart.png';
                 this.ctx.drawImage(heart, this.x * this.y, 100, 100);
             break;
-            case (this.randomNumber >= 75): //coinStack
+            case (this.randomNumber >= 75): //coinBag
+                let coinBag = new Image();
+                heart.src = 'src/images/coin_bag.png';
+                this.ctx.drawImage(coinBag, this.x, this.y, 100, 100);
+            break;
+            case this.randomNumber >= 50: // coinStack
                 let coinStack = new Image();
                 heart.src = 'src/images/coin_stack.png';
                 this.ctx.drawImage(coinStack, this.x, this.y, 100, 100);
             break;
-            case this.randomNumber >= 50: // goldCoin
+            case this.randomNumber >= 0: // goldCoin
                 let goldCoin = new Image();
                 heart.src = 'src/images/gold_coin.png';
                 this.ctx.drawImage(goldCoin, this.x, this.y, 100, 100);
-            break;
-            case this.randomNumber >= 0: // silverCoin
-                let silverCoin = new Image();
-                heart.src = 'src/images/coi_stack.png';
-                this.ctx.drawImage(silverCoin, this.x, this.y, 100, 100);
             break;
         }
     }
