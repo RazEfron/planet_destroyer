@@ -164,6 +164,8 @@ class Game {
     }
 
     restartLevel() {
+        debugger
+        this.levels = new Level(this);
         this.level = this.levels.setup[this.currentLevel]
     }
 
@@ -178,7 +180,7 @@ class Game {
             debugger
             if (this.lasers.length === 0) {
                 this.lasers.push(new Laser(this.canvas, this.ctx, this))
-            } else if (this.lasers[this.lasers.length - 1].y <= 0){
+            } else if (this.lasers[this.lasers.length - 1].y <= 10){
                 this.lasers.pop()
             }
         }
@@ -265,13 +267,22 @@ class Game {
             })
         })
         this.level.splice(idx, 1);
+        
         if (bubble.size !== 1) {
-            this.level.push({ size: bubble.size - 1, x: bubble.x - 30, y: bubble.y - 50, bubbleDX: bubble.bubbleDX });
-            this.level.push({ size: bubble.size - 1, x: bubble.x + 30, y: bubble.y - 50, bubbleDX: -bubble.bubbleDX });
+            this.level.push({ size: bubble.size - 1, x: bubble.x - 30, y: bubble.y - 200, bubbleDX: bubble.bubbleDX });
+            this.level.push({ size: bubble.size - 1, x: bubble.x + 30, y: bubble.y - 200, bubbleDX: -bubble.bubbleDX });
+        }
+        if (this.level.length === 0) {
+            return this.levelCleared();
         }
         this.createBubbles();
     }
-
+    
+    levelCleared() {
+        this.currentLevel += 1;
+        this.restartLevel();
+        this.createBubbles();
+    }
 }
 
 module.exports = Game;
