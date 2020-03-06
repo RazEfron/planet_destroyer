@@ -8,7 +8,8 @@ const GAMESTATE = {
     PAUSED: 0,
     RUNNING: 1,
     MENU: 2,
-    GAMEOVER: 3
+    GAMEOVER: 3,
+    LEVELDONE: 4
 };
 
 class Game {
@@ -29,13 +30,15 @@ class Game {
         this.createBubbles = this.createBubbles.bind(this);
         this.explodeBubble = this.explodeBubble.bind(this);
         
-        this.lives = [0, 1, 2, 3, 4];
+        this.lives = [4, 3, 2, 1, 0];
         this.lasers = []
         this.levels = new Level(this)
         this.currentLevel = 1
         this.level = this.levels.setup[this.currentLevel]
         this.createBubbles()
         this.board = new Board(this.canvas, this.ctx, this);
+
+        this.score = 0
     }
     
     start() {
@@ -84,15 +87,26 @@ class Game {
             this.ctx.fillText("GAME OVER", this.canvas.width / 2, this.canvas.height / 2);
             this.ctx.fillText("Press N to start a new game", this.canvas.width / 2, this.canvas.height / 2 + 100);
         }
+        if (this.gameState === GAMESTATE.LEVELDONE) {
+
+            this.ctx.rect(0, 0, this.canvas.width, this.canvas.height);
+            this.ctx.fillStyle = "rgba(0,0,0,1)";
+            this.ctx.fill();
+            this.ctx.font = "30px Arial";
+            this.ctx.fillStyle = "white";
+            this.ctx.textAlign = "center";
+            this.ctx.fillText(`LEVEL ${this.currentLevel}`, this.canvas.width / 2, this.canvas.height / 2);
+        }
     }
 
     update() {
         if (this.gameState === GAMESTATE.PAUSED || 
             this.gameState === GAMESTATE.GAMEOVER ||
-            this.gameState === GAMESTATE.MENU) {
-            
-            return  ;
+            this.gameState === GAMESTATE.MENU ||
+            this.gameState === GAMESTATE.LEVELDONE) {
+            return;
         } 
+
         this.collision();
         this.gameOver();
         this.board.updateGame();
@@ -102,7 +116,7 @@ class Game {
         const { player } = this.board;
         const playerX = player.position.x + 35;
         const playerY = player.position.y + 65;
-        const rightPointPlayerX = playerX + 115;
+        const rightPointPlayerX = playerX + 73;
 
         this.bubbles.some((bubble, idx) => {
             let radius = bubble.width / 4.5;
@@ -121,7 +135,11 @@ class Game {
             const distMidY = playerY - bubbleCenterY;
             const distanceMiddle = Math.hypot(distMidX, distMidY)
             if (distanceLeft <= radius || distanceRight <= radius || distanceMiddle <= radius) {
-                debugger
+                
+                this.loseLife()
+                return true
+            }
+            if (bubble.size === 1 && bubbleCenterX >= playerX && bubbleCenterX <= rightPointPlayerX && bubbleCenterY >= playerY) {
                 this.loseLife()
                 return true
             }
@@ -138,7 +156,7 @@ class Game {
                 const distanceLaserMidPoint = Math.hypot(distLaserX, distLaserMidY)
                 
                 if (distanceLaserUpperPoint <= radius || distanceLaserDownPoint <= radius || distanceLaserMidPoint <= radius) {
-                    debugger
+                    
                     console.log("collision")
                     this.explodeBubble(bubble, idx)
                 }
@@ -155,7 +173,7 @@ class Game {
     }
 
     loseLife() {
-        debugger
+        
         this.lives.pop();
         this.restartLevel();
         this.createBubbles();
@@ -163,31 +181,27 @@ class Game {
         this.gameState = GAMESTATE.RUNNING;
     }
 
-    restartLevel() {
-        debugger
+    restartLevel(){
         this.levels = new Level(this);
         this.level = this.levels.setup[this.currentLevel]
     }
 
     gameOver() {
         if (this.lives.length === 0) {
-            this.gameState = GAMESTATE.GAMEOVER
+            debugger
+            this.gameState = GAMESTATE.GAMEOVER;
+            this.currentLevel = 1;
+            this.restartLevel()
         }
     }
 
     shoot() {
         if (this.gameState === GAMESTATE.RUNNING) {
-            debugger
-            if (this.lasers.length === 0) {
                 this.lasers.push(new Laser(this.canvas, this.ctx, this))
-            } else if (this.lasers[this.lasers.length - 1].y <= 10){
-                this.lasers.pop()
-            }
         }
     }
 
     createBubbles() {
-        debugger
         this.bubbles = this.level.map(bubble => {
             if (bubble.size === 5) {
                 return new Bubble(this.canvas, this.ctx, 5, {
@@ -196,7 +210,7 @@ class Game {
                     height: 300, 
                     width: 300, 
                     bubbleDX: bubble.bubbleDX,
-                    bubbleDY: 0,
+                    bubbleDY: bubble.bubbleDY,
                     gravity: 0.1,
                     gravitySpeed: 0,
                     bounce: 1.005
@@ -208,7 +222,7 @@ class Game {
                     height: 250,
                     width: 250,
                     bubbleDX: bubble.bubbleDX,
-                    bubbleDY: 0,
+                    bubbleDY: bubble.bubbleDY,
                     gravity: 0.1,
                     gravitySpeed: 0,
                     bounce: 1.005
@@ -220,7 +234,7 @@ class Game {
                     height: 200,
                     width: 200,
                     bubbleDX: bubble.bubbleDX,
-                    bubbleDY: 0,
+                    bubbleDY: bubble.bubbleDY,
                     gravity: 0.1,
                     gravitySpeed: 0,
                     bounce: 1.005
@@ -232,7 +246,7 @@ class Game {
                     height: 150,
                     width: 150,
                     bubbleDX: bubble.bubbleDX,
-                    bubbleDY: 0,
+                    bubbleDY: bubble.bubbleDY,
                     gravity: 0.1,
                     gravitySpeed: 0,
                     bounce: 1.005
@@ -244,7 +258,7 @@ class Game {
                     height: 75,
                     width: 75,
                     bubbleDX: bubble.bubbleDX,
-                    bubbleDY: 0,
+                    bubbleDY: bubble.bubbleDY,
                     gravity: 0.1,
                     gravitySpeed: 0,
                     bounce: 1.005
@@ -255,7 +269,7 @@ class Game {
     }
 
     explodeBubble(bubble, idx) {
-        debugger
+        this.score += 250;
         this.lasers = [];
         this.level.forEach((levelBubble, idx1) => {
             this.bubbles.forEach((bubble, idx2) => {
@@ -263,17 +277,18 @@ class Game {
                     levelBubble.x = bubble.x;
                     levelBubble.y = bubble.y;
                     levelBubble.bubbleDX = bubble.bubbleDX;
+                    levelBubble.bubbleDY = bubble.bubbleDY;
                 }
             })
         })
         this.level.splice(idx, 1);
         
         if (bubble.size !== 1) {
-            this.level.push({ size: bubble.size - 1, x: bubble.x - 30, y: bubble.y - 200, bubbleDX: bubble.bubbleDX });
-            this.level.push({ size: bubble.size - 1, x: bubble.x + 30, y: bubble.y - 200, bubbleDX: -bubble.bubbleDX });
+            this.level.push({ size: bubble.size - 1, x: bubble.x, y: bubble.y, bubbleDX: bubble.bubbleDX, bubbleDY: bubble.bubbleDY });
+            this.level.push({ size: bubble.size - 1, x: bubble.x, y: bubble.y, bubbleDX: -bubble.bubbleDX, bubbleDY: -bubble.bubbleDY});
         }
         if (this.level.length === 0) {
-            return this.levelCleared();
+            this.levelCleared();
         }
         this.createBubbles();
     }
@@ -281,7 +296,8 @@ class Game {
     levelCleared() {
         this.currentLevel += 1;
         this.restartLevel();
-        this.createBubbles();
+        this.gameState = GAMESTATE.LEVELDONE;
+        setTimeout(() => { this.gameState = GAMESTATE.RUNNING }, 1000);
     }
 }
 

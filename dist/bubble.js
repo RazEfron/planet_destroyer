@@ -46,16 +46,19 @@ class Bubble {
 
     update() {
         
-        this.gravitySpeed += this.gravity;
+        // this.gravitySpeed += this.gravity;
         this.x += this.bubbleDX;
-        this.y += this.bubbleDY + this.gravitySpeed;
-        let rockbottom = this.canvas.height - this.height / 2 - this.height / 10;
-        if (this.y > rockbottom) {
-            this.y = rockbottom;
-            this.gravitySpeed = -(this.gravitySpeed * this.bounce);
-        }
+        this.y += this.bubbleDY
+        // let rockbottom = this.canvas.height - this.height / 2 - this.height / 10;
+        // if (this.y > rockbottom) {
+        //     this.y = rockbottom;
+        //     this.gravitySpeed = -(this.gravitySpeed * this.bounce);
+        // }
         if (this.x + this.bubbleDX > this.canvas.width - this.width / 2 - this.height / 10 || this.x + this.bubbleDX < - this.height / 10) {
             this.bubbleDX = -this.bubbleDX;
+        }
+        if (this.y + this.bubbleDY >= this.canvas.height - this.height / 2 || this.y + this.bubbleDY < 0) {
+            this.bubbleDY = -this.bubbleDY;
         }
         this.realCoordinates()
     }

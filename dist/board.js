@@ -33,6 +33,7 @@ class Board {
         this.player.draw();
         this.drawLives();
         this.game.lasers.forEach(shot => shot.draw())
+        this.drawText()
     }
 
     updateGame() {
@@ -45,10 +46,19 @@ class Board {
         let heart = new Image();
         heart.src = 'src/images/heart.png';
         this.game.lives.forEach(heartCount => {
-            this.ctx.drawImage(heart, heartCount * 40, 0, 100, 100);
+            this.ctx.drawImage(heart, 620 + heartCount * 40, 0, 100, 100);
             this.ctx.beginPath();
             
         });
+    }
+
+    drawText() {
+        this.ctx.font = "30px Arial";
+        this.ctx.textAlign = "start";
+        this.ctx.fillText(`High Score: ${this.game.score}`, 40, 50);
+        this.ctx.font = "20px Arial";
+        this.ctx.textAlign = "center";
+        this.ctx.fillText(`Level ${this.game.currentLevel}`, this.canvas.width / 2, 30)
     }
 }
 
