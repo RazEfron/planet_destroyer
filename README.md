@@ -1,4 +1,4 @@
-# bubble_trouble
+# Planet Destroyer
 A shooter game. pop the different shapes to clear the levels.
 
 ## Functionality & MVP
