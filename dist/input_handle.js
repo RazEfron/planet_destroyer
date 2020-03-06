@@ -4,7 +4,7 @@ Sound = require('./sound');
 class InputHandler {
     constructor(game) {
         this.locked = false
-        this.sound = new Sound("/Users/razefron/Desktop/bubble_trouble/src/sounds/shooting.mp3");
+        this.sound = new Sound("src/sounds/shooting.mp3");
         document.addEventListener("keydown", e => {
             switch (e.key) {
                 case ("ArrowRight"):
