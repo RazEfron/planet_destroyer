@@ -47,8 +47,6 @@ class Board {
         heart.src = 'src/images/heart.png';
         this.game.lives.forEach(heartCount => {
             this.ctx.drawImage(heart, 620 + heartCount * 40, 0, 100, 100);
-            this.ctx.beginPath();
-            
         });
     }
 

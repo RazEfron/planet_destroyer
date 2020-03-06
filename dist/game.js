@@ -3,6 +3,7 @@ InputHandler = require('../dist/input_handle');
 Laser = require('../dist/laser');
 Bubble = require('./bubble');
 Level = require('./levels');
+Gifts = require('./gifts');
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -39,6 +40,7 @@ class Game {
         this.board = new Board(this.canvas, this.ctx, this);
 
         this.score = 0
+        this.gifts = []
     }
     
     start() {
@@ -298,6 +300,10 @@ class Game {
         this.restartLevel();
         this.gameState = GAMESTATE.LEVELDONE;
         setTimeout(() => { this.gameState = GAMESTATE.RUNNING }, 1000);
+    }
+
+    dropGift(x, y) {
+        this.gifts.push(new Gift(x, y, this))
     }
 }
 

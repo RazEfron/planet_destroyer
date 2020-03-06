@@ -38,11 +38,6 @@ class InputHandler {
                 case ("ArrowLeft"):
                     if (game.board.player.speed < 0) game.board.player.stop();
                     break;
-
-                // case (" "):
-                //     game.stopShooting();
-                //     break 
-
                 default:
                     break;
             }
