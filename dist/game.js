@@ -215,7 +215,8 @@ class Game {
         if (this.lives.length === 0) {
             this.gameState = GAMESTATE.GAMEOVER;
             this.currentLevel = 1;
-            this.restartLevel()
+            this.score = 0;
+            this.restartLevel();
         }
     }
 
