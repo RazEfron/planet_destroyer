@@ -21,7 +21,7 @@ class Board {
 
     drawBackground() {
         let background = new Image();
-        background.src = 'src/images/background_level_one.jpg'
+        background.src = `src/images/background_level_${this.game.currentLevel}.jpg`
         this.ctx.drawImage(background, 0, 0, this.canvas.width, this.canvas.height);
         this.ctx.beginPath();
     }

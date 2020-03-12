@@ -34,7 +34,7 @@ class Game {
         this.lives = [1, 1, 1];
         this.lasers = []
         this.levels = new Level(this)
-        this.currentLevel = 1
+        this.currentLevel = 6
         this.level = this.levels.setup[this.currentLevel]
         this.createBubbles()
         this.board = new Board(this.canvas, this.ctx, this);
