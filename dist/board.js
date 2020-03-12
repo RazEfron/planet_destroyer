@@ -63,7 +63,7 @@ class Board {
     drawText() {
         this.ctx.font = "30px Arial";
         this.ctx.textAlign = "start";
-        this.ctx.fillText(`High Score: ${this.game.score}`, 40, 50);
+        this.ctx.fillText(`Score: ${this.game.score}`, 40, 50);
         this.ctx.font = "20px Arial";
         this.ctx.textAlign = "center";
         this.ctx.fillText(`Level ${this.game.currentLevel}`, this.canvas.width / 2, 30);

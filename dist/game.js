@@ -17,7 +17,7 @@ class Game {
     constructor(canvas, ctx) {
         this.canvas = canvas;
         this.ctx = ctx;
-        this.gameState = GAMESTATE.MENU;
+        this.gameState = GAMESTATE.GAMEOVER;
         this.handleInput = new InputHandler(this);
         
         this.start = this.start.bind(this);
@@ -39,9 +39,10 @@ class Game {
         this.createBubbles()
         this.board = new Board(this.canvas, this.ctx, this);
 
-        this.score = 0
+        this.score = 0;
+        // this.highScore = this.score;
         this.gifts = []
-        
+        localStorage.setItem("highscore", 0);
     }
     
     start() {
@@ -51,7 +52,7 @@ class Game {
 
         if (this.gameState === GAMESTATE.GAMEOVER) {
             this.createBubbles()
-            this.lives = [0, 1, 2, 3, 4];
+            this.lives = [1, 1, 1];
             this.board = new Board(this.canvas, this.ctx, this);
             this.gameState = GAMESTATE.RUNNING;
         }
@@ -87,8 +88,12 @@ class Game {
             this.ctx.font = "30px Arial";
             this.ctx.fillStyle = "white";
             this.ctx.textAlign = "center";
-            this.ctx.fillText("GAME OVER", this.canvas.width / 2, this.canvas.height / 2);
+            this.ctx.fillText("GAME OVER", this.canvas.width / 2, 160);
             this.ctx.fillText("Press N to start a new game", this.canvas.width / 2, this.canvas.height / 2 + 100);
+            this.ctx.font = "30px Arial";
+            this.ctx.textAlign = "center";
+            let highScore = localStorage.getItem("highscore");
+            this.ctx.fillText(`High Score ${highScore}`, this.canvas.width / 2, this.canvas.height / 2);
         }
         if (this.gameState === GAMESTATE.LEVELDONE) {
 
@@ -215,15 +220,19 @@ class Game {
         if (this.lives.length === 0) {
             this.gameState = GAMESTATE.GAMEOVER;
             this.currentLevel = 1;
-            this.score = 0;
             this.lives = [1, 1, 1]
+            let storagedHighScore = localStorage.getItem("highscore");
+            debugger
+            if (this.score > parseInt(storagedHighScore)) {
+                localStorage.setItem("highscore", this.score);
+            }
+            this.score = 0;
             this.restartLevel();
         }
     }
 
     shoot() {
         if (this.gameState === GAMESTATE.RUNNING) {
-            debugger
             let laser = new Laser(this.canvas, this.ctx, this)
             // laser.sound.play()
                 this.lasers.push(laser)
