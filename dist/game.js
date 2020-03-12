@@ -216,6 +216,7 @@ class Game {
             this.gameState = GAMESTATE.GAMEOVER;
             this.currentLevel = 1;
             this.score = 0;
+            this.lives = [1, 1, 1]
             this.restartLevel();
         }
     }
