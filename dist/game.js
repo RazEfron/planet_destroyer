@@ -17,7 +17,7 @@ class Game {
     constructor(canvas, ctx) {
         this.canvas = canvas;
         this.ctx = ctx;
-        this.gameState = GAMESTATE.GAMEOVER;
+        this.gameState = GAMESTATE.MENU;
         this.handleInput = new InputHandler(this);
         
         this.start = this.start.bind(this);
@@ -34,7 +34,7 @@ class Game {
         this.lives = [1, 1, 1];
         this.lasers = []
         this.levels = new Level(this)
-        this.currentLevel = 6
+        this.currentLevel = 1
         this.level = this.levels.setup[this.currentLevel]
         this.createBubbles()
         this.board = new Board(this.canvas, this.ctx, this);
