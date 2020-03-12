@@ -6,22 +6,23 @@ class InputHandler {
         this.locked = false
         this.sound = new Sound("src/sounds/shooting.mp3");
         document.addEventListener("keydown", e => {
-            switch (e.key) {
-                case ("ArrowRight"):
+            debugger
+            switch (e.keyCode) {
+                case (39):
                     game.board.player.moveRight();
                     break;
 
-                case ("ArrowLeft"):
+                case (37):
                     game.board.player.moveLeft();
                     break;
 
-                case ("p"): 
+                case (80): 
                     game.togglePause()
                     break
-                case ("n"):
+                case (78):
                     game.start()
                     break
-                case (" "):
+                case (32):
                     this.sound.play()
                     if (this.locked) return
                         game.shoot()
@@ -34,12 +35,12 @@ class InputHandler {
         })
 
         document.addEventListener("keyup", e => {
-            switch (e.key) {
-                case ("ArrowRight"):
+            switch (e.keyCode) {
+                case (39):
                     if (game.board.player.speed > 0) game.board.player.stop();
                     break;
 
-                case ("ArrowLeft"):
+                case (37):
                     if (game.board.player.speed < 0) game.board.player.stop();
                     break;
                 default:
