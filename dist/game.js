@@ -4,7 +4,7 @@ Laser = require('../dist/laser');
 Bubble = require('./bubble');
 Level = require('./levels');
 Gift = require('./gifts');
-
+Sound = require('./sound');
 const GAMESTATE = {
     PAUSED: 0,
     RUNNING: 1,
@@ -130,20 +130,29 @@ class Game {
         const playerX = player.position.x + 35;
         const playerY = player.position.y + 65;
         const rightPointPlayerX = playerX + 73;
+        let sound
 
         this.gifts.forEach(gift => {
             if (gift.y + gift.height / 2 >= playerY) {
                 if ((gift.x >= playerX && gift.x <= rightPointPlayerX) || (gift.x + gift.width >= playerX && gift.x + gift.width <= rightPointPlayerX)) {
-                    console.log('collision')
                     gift.delete = true;
+                    debugger
                     if (gift.randomNumber >= 980 && this.lives.length < 5) {//lives
-                      this.lives.push(1)
+                        sound = new Sound("src/sounds/heart.mp3");
+                        sound.play();
+                        this.lives.push(1)
                     } else if (gift.randomNumber >= 850) {//coinBag
+                        sound = new Sound("src/sounds/coinSound.mp3");
+                        sound.play();
                         this.score += 750
                     } else if (gift.randomNumber >= 650) {// coinStack
+                        sound = new Sound("src/sounds/coinSound.mp3");
+                        sound.play();
                         this.score += 500
                     }
                     else if (gift.randomNumber >= 450){// goldCoin
+                        sound = new Sound("src/sounds/coinSound.mp3");
+                        sound.play();
                         this.score += 100
                     }
                 }
@@ -167,7 +176,6 @@ class Game {
             const distMidY = playerY - bubbleCenterY;
             const distanceMiddle = Math.hypot(distMidX, distMidY)
             if (distanceLeft <= radius || distanceRight <= radius || distanceMiddle <= radius) {
-                
                 this.loseLife()
                 return true
             }
@@ -203,7 +211,8 @@ class Game {
     }
 
     loseLife() {
-        
+        let sound = new Sound("src/sounds/lifeLostSound.mp3");
+        sound.play();
         this.lives.pop();
         this.restartLevel();
         this.createBubbles();
@@ -218,11 +227,13 @@ class Game {
 
     gameOver() {
         if (this.lives.length === 0) {
+            let sound = new Sound("src/sounds/gameOverSound.mp3");
+            sound.play();
             this.gameState = GAMESTATE.GAMEOVER;
             this.currentLevel = 1;
             this.lives = [1, 1, 1]
             let storagedHighScore = localStorage.getItem("highscore");
-            debugger
+            // debugger
             if (this.score > parseInt(storagedHighScore)) {
                 localStorage.setItem("highscore", this.score);
             }
@@ -307,6 +318,8 @@ class Game {
     }
 
     explodeBubble(bubble, idx) {
+        let sound = new Sound("src/sounds/explosionSound.mp3");
+        sound.play();
         this.score += 250;
         this.lasers = [];
         this.level.forEach((levelBubble, idx1) => {

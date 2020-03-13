@@ -4,9 +4,9 @@ Sound = require('./sound');
 class InputHandler {
     constructor(game) {
         this.locked = false
-        this.sound = new Sound("src/sounds/shooting.mp3");
+        this.shootingSound = new Sound("src/sounds/shooting.mp3");
         document.addEventListener("keydown", e => {
-            debugger
+            // debugger
             switch (e.keyCode) {
                 case (39):
                     game.board.player.moveRight();
@@ -23,7 +23,7 @@ class InputHandler {
                     game.start()
                     break
                 case (32):
-                    this.sound.play()
+                    this.shootingSound.play()
                     if (this.locked) return
                         game.shoot()
                     this.locked = true
