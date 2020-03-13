@@ -10,15 +10,19 @@ class Level {
             6: [{ size: 4, x: game.canvas.width / 2, y: 40, bubbleDX: 5, bubbleDY: 5.1 }, 
                 { size: 5, x: game.canvas.width / 2 - 200, y: 40, bubbleDX: 5, bubbleDY: -5.1 }],
             7: [{ size: 4, x: game.canvas.width / 2, y: 40, bubbleDX: 5, bubbleDY: 5.1 }, 
-                { size: 4, x: game.canvas.width / 2 - 200, y: 40, bubbleDX: 5, bubbleDY: -5.1 }, 
-                { size: 4, x: game.canvas.width / 2 - 200, y: 40, bubbleDX: 5, bubbleDY: -5.1 }],
+                { size: 4, x: game.canvas.width / 2 - 200, y: 40, bubbleDX: -5, bubbleDY: -5.1 }, 
+                { size: 4, x: game.canvas.width / 2 - 400, y: 40, bubbleDX: 5, bubbleDY: 5.1 }],
             8: [{ size: 5, x: game.canvas.width / 2, y: 40, bubbleDX: 5, bubbleDY: 5.1 }, 
-                { size: 4, x: game.canvas.width / 2 - 200, y: 40, bubbleDX: 5, bubbleDY: -5.1 }, 
-                { size: 4, x: game.canvas.width / 2 - 400, y: 40, bubbleDX: 5, bubbleDY: -5.1 }],
-            9: [{ size: 4, x: game.canvas.width / 2, y: 40, bubbleDX: 5, bubbleDY: 5.1 }, 
-                { size: 4, x: game.canvas.width / 2 - 100, y: 40, bubbleDX: 5, bubbleDY: -5.1 }, 
+                { size: 4, x: game.canvas.width / 2 - 200, y: 40, bubbleDX: -5, bubbleDY: -5.1 }, 
+                { size: 4, x: game.canvas.width / 2 - 400, y: 40, bubbleDX: 5, bubbleDY: 5.1 }],
+            9: [{ size: 5, x: game.canvas.width / 2, y: 40, bubbleDX: 5, bubbleDY: -5.1 }, 
+                { size: 4, x: game.canvas.width / 2 - 100, y: 40, bubbleDX: -5, bubbleDY: 5.1 }, 
                 { size: 4, x: game.canvas.width / 2 - 200, y: 40, bubbleDX: 5, bubbleDY: -5.1 },
-                { size: 4, x: game.canvas.width / 2 - 300, y: 40, bubbleDX: 5, bubbleDY: -5.1 }]
+                { size: 4, x: game.canvas.width / 2 - 300, y: 40, bubbleDX: -5, bubbleDY: 5.1 }],
+            10: [{ size: 5, x: game.canvas.width / 2, y: 40, bubbleDX: 5, bubbleDY: -5.1 }, 
+                { size: 5, x: game.canvas.width / 2 - 100, y: 40, bubbleDX: -5, bubbleDY: 5.1 }, 
+                { size: 5, x: game.canvas.width / 2 - 200, y: 40, bubbleDX: 5, bubbleDY: -5.1 },
+                { size: 4, x: game.canvas.width / 2 - 300, y: 40, bubbleDX: -5, bubbleDY: 5.1 }]
         }
     }
 }

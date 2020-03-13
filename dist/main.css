@@ -6,6 +6,9 @@ body {
     /* display: flex; */
     /* flex-direction: row; */
     box-sizing: border-box;
+    background-color: rgba(85, 85, 85);
+    display: flex;
+    justify-content: center;
 }
 
 #game-canvas {
@@ -13,17 +16,31 @@ body {
     border-radius: 50px;
     box-sizing: border-box;
     left: 50px;
-    top: 100px;
+    top: 150px;
     z-index: 1;
+    border: grey solid 3px;
 }
 
 #instructions {
     position: absolute;
     height: 500px;
     width: 27%;
-    background-color: aqua;
+    background-color: rgb(34, 34, 34);
+    border: grey solid 3px;
     border-radius: 50px;
     box-sizing: border-box;
     right: 50px;
-    top: 100px;
+    top: 150px;
+}
+
+.title {
+    font-family: 'Luckiest Guy', cursive;
+    color: rgb(34, 34, 34);
+    text-shadow:
+    -1px -1px 0 grey,
+    1px -1px 0 grey,
+    -1px 1px 0 grey,
+    1px 1px 0 grey;  
+    font-size: 60px;
+    /* margin: auto; */
 }

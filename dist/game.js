@@ -34,15 +34,15 @@ class Game {
         this.lives = [1, 1, 1];
         this.lasers = []
         this.levels = new Level(this)
-        this.currentLevel = 1
+        this.currentLevel = 1;
         this.level = this.levels.setup[this.currentLevel]
         this.createBubbles()
         this.board = new Board(this.canvas, this.ctx, this);
 
         this.score = 0;
-        // this.highScore = this.score;
         this.gifts = []
         localStorage.setItem("highscore", 0);
+        this.unmute = true;
     }
     
     start() {
@@ -68,7 +68,7 @@ class Game {
             this.ctx.font = "30px Arial";
             this.ctx.fillStyle = "white";
             this.ctx.textAlign = "center";
-            this.ctx.fillText("Press N to start a new game", this.canvas.width / 2, this.canvas.height / 2);
+            this.ctx.fillText("Press Enter to start a new game", this.canvas.width / 2, this.canvas.height / 2);
         }
         if (this.gameState === GAMESTATE.PAUSED) {
             
@@ -139,20 +139,20 @@ class Game {
                     debugger
                     if (gift.randomNumber >= 980 && this.lives.length < 5) {//lives
                         sound = new Sound("src/sounds/heart.mp3");
-                        sound.play();
+                        if (this.unmute) sound.play();
                         this.lives.push(1)
                     } else if (gift.randomNumber >= 850) {//coinBag
                         sound = new Sound("src/sounds/coinSound.mp3");
-                        sound.play();
+                       if (this.unmute) sound.play();
                         this.score += 750
                     } else if (gift.randomNumber >= 650) {// coinStack
                         sound = new Sound("src/sounds/coinSound.mp3");
-                        sound.play();
+                       if (this.unmute) sound.play();
                         this.score += 500
                     }
                     else if (gift.randomNumber >= 450){// goldCoin
                         sound = new Sound("src/sounds/coinSound.mp3");
-                        sound.play();
+                       if (this.unmute) sound.play();
                         this.score += 100
                     }
                 }
@@ -212,7 +212,7 @@ class Game {
 
     loseLife() {
         let sound = new Sound("src/sounds/lifeLostSound.mp3");
-        sound.play();
+       if (this.unmute) sound.play();
         this.lives.pop();
         this.restartLevel();
         this.createBubbles();
@@ -228,7 +228,7 @@ class Game {
     gameOver() {
         if (this.lives.length === 0) {
             let sound = new Sound("src/sounds/gameOverSound.mp3");
-            sound.play();
+           if (this.unmute) sound.play();
             this.gameState = GAMESTATE.GAMEOVER;
             this.currentLevel = 1;
             this.lives = [1, 1, 1]
@@ -319,7 +319,7 @@ class Game {
 
     explodeBubble(bubble, idx) {
         let sound = new Sound("src/sounds/explosionSound.mp3");
-        sound.play();
+       if (this.unmute) sound.play();
         this.score += 250;
         this.lasers = [];
         this.level.forEach((levelBubble, idx1) => {
@@ -335,8 +335,8 @@ class Game {
         this.level.splice(idx, 1);
         
         if (bubble.size !== 1) {
-            this.level.push({ size: bubble.size - 1, x: bubble.x, y: bubble.y, bubbleDX: bubble.bubbleDX, bubbleDY: bubble.bubbleDY });
-            this.level.push({ size: bubble.size - 1, x: bubble.x, y: bubble.y, bubbleDX: -bubble.bubbleDX, bubbleDY: -bubble.bubbleDY});
+            this.level.push({ size: bubble.size - 1, x: bubble.x, y: bubble.y, bubbleDX: bubble.bubbleDX + 0.5, bubbleDY: bubble.bubbleDY });
+            this.level.push({ size: bubble.size - 1, x: bubble.x, y: bubble.y, bubbleDX: -bubble.bubbleDX - 0.5, bubbleDY: -bubble.bubbleDY});
         }
         if (this.level.length === 0) {
             this.levelCleared();
