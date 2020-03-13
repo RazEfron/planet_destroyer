@@ -89,7 +89,7 @@ class Game {
             this.ctx.fillStyle = "white";
             this.ctx.textAlign = "center";
             this.ctx.fillText("GAME OVER", this.canvas.width / 2, 160);
-            this.ctx.fillText("Press N to start a new game", this.canvas.width / 2, this.canvas.height / 2 + 100);
+            this.ctx.fillText("Press Enter to start a new game", this.canvas.width / 2, this.canvas.height / 2 + 100);
             this.ctx.font = "30px Arial";
             this.ctx.textAlign = "center";
             let highScore = localStorage.getItem("highscore");

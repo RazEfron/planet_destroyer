@@ -67,6 +67,7 @@ class Board {
         this.ctx.font = "20px Arial";
         this.ctx.textAlign = "center";
         this.ctx.fillText(`Level ${this.game.currentLevel}`, this.canvas.width / 2, 30);
+        // this.game.unmute ? 
     }
 
     drawGifts() {
