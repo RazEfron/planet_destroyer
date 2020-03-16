@@ -31,7 +31,7 @@ class Game {
         this.createBubbles = this.createBubbles.bind(this);
         this.explodeBubble = this.explodeBubble.bind(this);
         
-        this.lives = [1, 1, 1];
+        this.lives = [1,1,1,1,1];
         this.lasers = []
         this.levels = new Level(this)
         this.currentLevel = 1;
@@ -52,7 +52,7 @@ class Game {
 
         if (this.gameState === GAMESTATE.GAMEOVER) {
             this.createBubbles()
-            this.lives = [1, 1, 1];
+            this.lives = [1,1,1,1,1];
             this.board = new Board(this.canvas, this.ctx, this);
             this.gameState = GAMESTATE.RUNNING;
         }
@@ -231,7 +231,7 @@ class Game {
            if (this.unmute) sound.play();
             this.gameState = GAMESTATE.GAMEOVER;
             this.currentLevel = 1;
-            this.lives = [1, 1, 1]
+            this.lives = [1,1,1,1,1]
             let storagedHighScore = localStorage.getItem("highscore");
             // debugger
             if (this.score > parseInt(storagedHighScore)) {
