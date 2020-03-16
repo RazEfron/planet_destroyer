@@ -19,7 +19,6 @@ body {
     top: 150px;
     z-index: 1;
     border: grey solid 3px;
-    /* display: none; */
 }
 
 #instructions {

@@ -30,7 +30,7 @@ class InputHandler {
                     if (this.locked) return
                         game.shoot()
                     this.locked = true
-                    setTimeout(() => { this.locked = false; }, 250); 
+                    setTimeout(() => { this.locked = false; }, 200); 
                     break
                 default:
                     break;

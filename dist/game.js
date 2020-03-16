@@ -183,7 +183,7 @@ class Game {
                 this.loseLife()
                 return true
             }
-            this.lasers.forEach(shot => {
+            this.lasers.forEach((shot, laserIdx) => {
                 //cheking laser and bubble collision
                 const laserPointX = shot.x + 13
                 const laserPointY = shot.y + 7
@@ -196,7 +196,7 @@ class Game {
                 const distanceLaserMidPoint = Math.hypot(distLaserX, distLaserMidY)
                 
                 if (distanceLaserUpperPoint <= radius || distanceLaserDownPoint <= radius || distanceLaserMidPoint <= radius) {
-                    this.explodeBubble(bubble, idx)
+                    this.explodeBubble(bubble, idx, laserIdx)
                 }
             })
         })
@@ -317,11 +317,11 @@ class Game {
         })
     }
 
-    explodeBubble(bubble, idx) {
+    explodeBubble(bubble, bubbleIdx, laserIdx) {
         let sound = new Sound("src/sounds/explosionSound.mp3");
        if (this.unmute) sound.play();
         this.score += 250;
-        this.lasers = [];
+        // this.lasers = [];
         this.level.forEach((levelBubble, idx1) => {
             this.bubbles.forEach((bubble, idx2) => {
                 if (idx1 === idx2) {
@@ -332,7 +332,7 @@ class Game {
                 }
             })
         })
-        this.level.splice(idx, 1);
+        this.level.splice(bubbleIdx, 1);
         
         if (bubble.size !== 1) {
             this.level.push({ size: bubble.size - 1, x: bubble.x, y: bubble.y, bubbleDX: bubble.bubbleDX + 0.5, bubbleDY: bubble.bubbleDY });
@@ -343,6 +343,7 @@ class Game {
         }
         this.dropGift(bubble.x, bubble.y)
         this.createBubbles();
+        this.lasers.splice(laserIdx, 1);
     }
     
     levelCleared() {
