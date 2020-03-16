@@ -1,18 +1,17 @@
-img {
+.invisible {
     display: none;
 }
 
 body {
-    /* display: flex; */
-    /* flex-direction: row; */
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     background-color: rgba(85, 85, 85);
-    display: flex;
     justify-content: center;
 }
 
 #game-canvas {
-    position: absolute;
+    /* position: absolute; */
     border-radius: 50px;
     box-sizing: border-box;
     left: 50px;
@@ -23,7 +22,7 @@ body {
 
 #instructions {
     font-family: 'Luckiest Guy', cursive;
-    position: absolute;
+    /* position: absolute; */
     height: 500px;
     width: 27%;
     min-width: 315px;
@@ -72,6 +71,33 @@ body {
     border: none;
 }
 
-#instructions div {
+.main {
     display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;
+}
+
+.link-container {
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.link-container img {
+    width: 60px;
+    height: 60px;
+    margin-top: 5px;
+}
+
+.link-container a:hover {
+    cursor: pointer;
+    opacity: 0.5;
 }
