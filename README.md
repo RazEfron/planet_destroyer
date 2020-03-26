@@ -14,5 +14,10 @@ visit [planet destroyer](http://razefron.com/planet_destroyer/)
 * HTML5
 * Webpack
 
-## key features
+## features
 
+* Incersingly hadrder levels
+* Dynamic canvas that reacts to the game state to render smooth game view.
+* Collision Detection that enables shooting planets, collecting gifts, and loosing life, using pythagoras theorem
+
+<img src="src/images/collision.gif" width="100%"/>
