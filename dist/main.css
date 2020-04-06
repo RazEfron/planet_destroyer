@@ -11,7 +11,6 @@ body {
 }
 
 #game-canvas {
-    /* position: absolute; */
     border-radius: 50px;
     box-sizing: border-box;
     left: 50px;
@@ -21,8 +20,7 @@ body {
 }
 
 #instructions {
-    font-family: 'Luckiest Guy', cursive;
-    /* position: absolute; */
+    font-family: Arial, Helvetica, sans-serif
     height: 500px;
     width: 27%;
     min-width: 315px;
@@ -57,7 +55,7 @@ body {
 }
 
 .title {
-    font-family: 'Luckiest Guy', cursive;
+    font-family: Arial, Helvetica, sans-serif
     color: rgb(34, 34, 34);
     text-shadow:
     -1px -1px 0 grey,
