@@ -18,6 +18,6 @@ visit [planet destroyer](http://razefron.com/planet_destroyer/)
 
 * Incersingly hadrder levels
 * Dynamic canvas that reacts to the game state to render smooth game view.
-* Collision Detection that enables shooting planets, collecting gifts, and loosing life, using pythagoras theorem
+* Collision Detection that enables shooting planets, collecting gifts, and loosing life, using Pythagorean theorem
 
-<img src="src/images/collision.gif" width="100%"/>
+<img src="src/images/collision.png" width="100%"/>
