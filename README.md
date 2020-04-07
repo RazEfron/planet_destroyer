@@ -1,6 +1,6 @@
 # Planet Destroyer
 
-Planet Destroyer is a shooting game that
+smooth shooting game where users can destroy planets to collect coins and progress through the levels.
 
 <img src="src/images/gif.gif" width="100%"/>
 
