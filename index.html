@@ -1,71 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="smooth shooting game where users can destroy planets to collect coins and progress through the levels."
+    />
+    <meta name="title" property="og:title" content="Planet Destroyer" />
+    <meta property="og:type" content="Website" />
+    <meta name="image" property="og:image" content="https://random-assets-raz.s3.amazonaws.com/Planet+Destroyer.png" />
+    <meta
+      name="description"
+      property="og:description"
+      content="smooth shooting game where users can destroy planets to collect coins and progress through the levels."
+    />
+    <meta name="author" content="_" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="icon" href="/planet1.png">
+    <link rel="icon" href="/planet1.png" />
     <link rel="stylesheet" href="./dist/main.css" />
     <script src="./dist/main.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" type="image/jpg" href="./src/images/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      type="image/jpg"
+      href="./src/images/favicon.png"
+    />
     <title>Planet Destroyer</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="title-container">
-        <h1 class="title">Planet Destroyer</h1>
+      <h1 class="title">Planet Destroyer</h1>
     </div>
     <div class="main">
-        <canvas id="game-canvas" width="900" height="500"></canvas>
-        <div id="instructions">
-            <div>
-                <h1>Instructions</h1>
-            </div>
-            <div>
-                <ul>
-                    <li>
-                        Use the arrow keys to move left and right
-                    </li>
-                    <li>
-                        Use space to shoot
-                    </li>
-                    <li>
-                        Press M to toggle sound
-                    </li>
-                    <li>
-                        Press P to pause The game
-                    </li>
-                </ul>
-            </div>
-            <div class="link-container"> 
-                <div>
-                    
-                    <a href="https://angel.co/raz-efron" target="_blank">
-                        <img src="src/images/angel.png" alt="">
-                    </a>
-                </div>
-                <div>
-
-                    <a href="https://github.com/RazEfron/planet_destroyer" target="_blank">
-                        <img src="src/images/github.png" alt="">
-                    </a>
-                </div>
-                <div>
-
-                    <a href="https://linkedin.com/in/raz-efron" target="_blank">
-                        <img src="src/images/linkedin.png" alt="">
-                    </a>
-                </div>
-            </div>
+      <canvas id="game-canvas" width="900" height="500"></canvas>
+      <div id="instructions">
+        <div>
+          <h1>Instructions</h1>
         </div>
+        <div>
+          <ul>
+            <li>Use the arrow keys to move left and right</li>
+            <li>Use space to shoot</li>
+            <li>Press M to toggle sound</li>
+            <li>Press P to pause The game</li>
+          </ul>
+        </div>
+        <div class="link-container">
+          <div>
+            <a href="https://angel.co/raz-efron" target="_blank">
+              <img src="src/images/angel.png" alt="" />
+            </a>
+          </div>
+          <div>
+            <a
+              href="https://github.com/RazEfron/planet_destroyer"
+              target="_blank"
+            >
+              <img src="src/images/github.png" alt="" />
+            </a>
+          </div>
+          <div>
+            <a href="https://linkedin.com/in/raz-efron" target="_blank">
+              <img src="src/images/linkedin.png" alt="" />
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    <img class="invisible" id="planet-one" src="src/images/planet1.png" alt="">
-    <img class="invisible" id="planet-two" src="src/images/planet2.png" alt="">
-    <img class="invisible" id="planet-three" src="src/images/planet3.png" alt="">
-    <img class="invisible" id="planet-four" src="src/images/planet4.png" alt="">
-    <img class="invisible" id="planet-five" src="src/images/planet5.png" alt="">
-</body>
-
+    <img
+      class="invisible"
+      id="planet-one"
+      src="src/images/planet1.png"
+      alt=""
+    />
+    <img
+      class="invisible"
+      id="planet-two"
+      src="src/images/planet2.png"
+      alt=""
+    />
+    <img
+      class="invisible"
+      id="planet-three"
+      src="src/images/planet3.png"
+      alt=""
+    />
+    <img
+      class="invisible"
+      id="planet-four"
+      src="src/images/planet4.png"
+      alt=""
+    />
+    <img
+      class="invisible"
+      id="planet-five"
+      src="src/images/planet5.png"
+      alt=""
+    />
+  </body>
 </html>
